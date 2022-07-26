@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 function Login(){
 
     const submitHandler = e =>{
@@ -17,12 +19,17 @@ function Login(){
             return;
         }
 
-        if(email !== 'carladev@alkemy.org' || password !== 'react'){
+        if(email !== 'challenge@alkemy.org' || password !== 'react'){
             console.log("Credenciales invalidas");
             return;
         }
 
         console.log("Ok, estamos listos para enviar la informacion");
+        axios
+            .post('http://challenge-react.alkemy.org', {email, password})
+            .then(res =>{
+                console.log(res.data);
+            })
     }
     return(
         <>
