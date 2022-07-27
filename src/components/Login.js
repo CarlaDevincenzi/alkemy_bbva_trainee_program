@@ -20,16 +20,17 @@ function Login(){
             return;
         }
 
-        if(email !== 'challenge@alkemy.org' || password !== 'react'){
+        if(email !== "challenge@alkemy.org" || password !== "react"){
             swAlert(<h2>Credenciales invalidas</h2>);            
             return;
         }
                 
         axios
-            .post('http://challenge-react.alkemy.org', {email, password})
+            .post("http://challenge-react.alkemy.org", {email, password})
             .then(res =>{
-                swAlert(<h2>Perfecto, ingresaste correctamente</h2>);
-                console.log(res.data);
+                swAlert(<h2>Perfecto, ingresaste correctamente</h2>);                
+                const info_token = res.data.token;
+                localStorage.setItem("token", info_token);
             })
     }
     return(
