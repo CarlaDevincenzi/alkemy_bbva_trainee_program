@@ -1,6 +1,6 @@
 import axios from 'axios';
 import swAlert from '@sweetalert/with-react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login(){
 
