@@ -1,12 +1,19 @@
+// Libraries
 import {Routes, Route} from "react-router-dom";
+//Components
 import Login from './components/Login';
 import Listado from './components/Listado';
 import Header from './components/Header';
 import Footer from './components/Footer';
+// Styles
+//import './css/app.css';
+import './css/bootstrap.min.css';
+
 
 function App() {
-  return (       
-    <>
+  return (
+     
+    <div className="container">      
       <Header />
       
       <Routes>
@@ -15,7 +22,8 @@ function App() {
       </Routes>
 
       <Footer />
-    </>    
+      </div>   
+        
   );
 }
 
