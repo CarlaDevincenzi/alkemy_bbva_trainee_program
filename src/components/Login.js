@@ -42,7 +42,7 @@ function Login(){
 
     return(
         <>
-            { token && <Navigate to="/listado" replace/> }
+            { token && <Navigate replace to="/listado" /> }
 
             <div className="row">
                 <div className="col-6 offset-3">

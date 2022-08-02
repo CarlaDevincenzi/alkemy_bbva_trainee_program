@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link, Navigate } from "react-router-dom";
+import axios from 'axios';
 
-function Listado(){    
-    //const [activo, setActivo] = useState(false);
+function Listado(){
     
     let token = localStorage.getItem("token");
+    const [moviesList, setMoviesList] = useState([]);
 
-    //useEffect(() => {
-      //  token = localStorage.getItem("token");       
-   // }, []);    
+    useEffect(() => {
+      const  endPoint = 'https://api.themoviedb.org/3/discover/movie?api_key=f42cd7e77ee2958bbac0b48a6cbaaa7a&language=es-ES&page=1'       
+      axios.get(endPoint)
+            .then(response => {
+                const apiData = response.data.results
+                setMoviesList(apiData);
+      });
+    }, [setMoviesList]);    
     
+    console.log(moviesList);
+
     return(
         <>
-            { ((!token)? <Navigate to="/" replace/> :        
+            { ((!token)? <Navigate replace to="/" /> :        
                 <div className="row">
                     <div className="col-3">
                         <div className="card">
