@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link, Navigate } from "react-router-dom";
 import axios from 'axios';
+import swAlert from '@sweetalert/with-react';
 
 function Listado(){
     
@@ -13,7 +14,10 @@ function Listado(){
             .then(response => {
                 const apiData = response.data.results
                 setMoviesList(apiData);
-      });
+            })
+            .catch(error => {
+                swAlert(<h2>Hubo un error, intenta mas tarde</h2>);
+            })
     }, [setMoviesList]);    
     
     console.log(moviesList);
