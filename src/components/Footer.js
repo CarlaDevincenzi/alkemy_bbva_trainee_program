@@ -3,7 +3,7 @@ import '../css/footer.css';
 function Footer() {
     return (
         <footer>
-            <div className="navbar navbar-dark navbar-expand-lg bg-dark text-light">
+            <div className="fixed-bottom navbar navbar-dark navbar-expand-lg bg-dark text-light">
                 <ul>
                     <li><a className="text-light" href="http://instagram.com" rel="noopenernoreferrer">Instagram</a></li>
                 </ul>

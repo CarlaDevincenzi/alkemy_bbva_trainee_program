@@ -8,7 +8,7 @@ function Listado(){
     const [moviesList, setMoviesList] = useState([]);
 
     useEffect(() => {
-      const  endPoint = 'https://api.themoviedb.org/3/discover/movie?api_key=f42cd7e77ee2958bbac0b48a6cbaaa7a&language=es-ES&page=1'       
+      const  endPoint = 'https://api.themoviedb.org/3/discover/movie?api_key=f42cd7e77ee2958bbac0b48a6cbaaa7a&language=en-EN&page=1'       
       axios.get(endPoint)
             .then(response => {
                 const apiData = response.data.results
@@ -22,16 +22,23 @@ function Listado(){
         <>
             { ((!token)? <Navigate replace to="/" /> :        
                 <div className="row">
-                    <div className="col-3">
-                        <div className="card">
-                            <img src="..." className="card-img-top" alt="..." />
-                            <div className="card-body">
-                                <h5 className="card-title">Movie Title</h5>
-                                <p className="card-text">Movie Review: Some quick example text to build on the card title and make up the bulk of the card's content.</p>                                             
-                                <Link to={"/"} className="btn btn-primary">Go somewhere</Link>                        
-                            </div>
-                        </div>
-                    </div>          
+                    {
+                        moviesList.map((oneMovie, index) =>{
+                            return (
+                                <div className="col-3" key={index}>
+                                    <div className="card my-4">
+                                        <img src={`https://image.tmdb.org/t/p/w500${oneMovie.poster_path}`} className="card-img-top" alt="..." />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{ oneMovie.title }</h5>
+                                            <p className="card-text">{ oneMovie.overview.substring(0, 150) }...</p>                                             
+                                            <Link to={"/"} className="btn btn-primary">Go somewhere</Link>                        
+                                        </div>
+                                    </div>
+                                </div>      
+                            )
+                        })
+                    }
+                        
                 </div>
             )}   
         </>            
