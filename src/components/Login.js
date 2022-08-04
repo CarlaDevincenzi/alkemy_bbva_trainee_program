@@ -33,12 +33,14 @@ function Login(){
             .then(res =>{
                 swAlert(<h2>Perfecto, ingresaste correctamente</h2>);                
                 const info_token = res.data.token;
-                localStorage.setItem("token", info_token);
+                //localStorage.setItem("token", info_token);
+                sessionStorage.setItem("token", info_token);
                 navigate("/listado");                
             })
     }
 
-    let token = localStorage.getItem("token");
+    //let token = localStorage.getItem("token");
+    let token = sessionStorage.getItem("token");
 
     return(
         <>
