@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link, Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from 'axios';
 import swAlert from '@sweetalert/with-react';
 
@@ -22,8 +22,7 @@ function Listado(){
             })
     }, [setMoviesList]);    
     
-    console.log(moviesList);
-
+    
     return(
         <>
             { ((!token)? <Navigate replace to="/" /> :        

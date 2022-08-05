@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 
 
 import './css/app.css';
+import CountryList from "./components/CountryList";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/" element={<Login/>} />
           <Route path="/listado" element={<Listado/>} />       
           <Route path="/detalle" element={<Detalle/>} />       
+          <Route path="/countrylist" element={<CountryList/>} />       
         </Routes>
       </div>
 

@@ -1,15 +1,26 @@
 import { Navigate } from "react-router-dom";
 import { useEffect } from 'react';
+import axios from 'axios';
 
 function Detalle (){
     //let token = localStorage.getItem('token');
     let token = sessionStorage.getItem('token');
+    
     let query = new URLSearchParams(window.location.search);
     let movieId = query.get('movieID');
 
     useEffect(() => {
-        console.log(movieId);
-    }, []);
+        const endPoint = `https://api.themoviedb.org/3/movie/${movieId}?api_key=f42cd7e77ee2958bbac0b48a6cbaaa7a&language=en-US`
+                
+        axios.get(endPoint)
+            .then(response => {
+                const movieData = response.data;
+                console.log(movieData);
+            })
+            .catch(error => {
+                console.log('Hubo un error, intenta mas tarde');
+            })        
+    }, [movieId]);
     
 
     return (
