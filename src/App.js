@@ -6,11 +6,10 @@ import Listado from './components/Listado';
 import Detalle from './components/Detalle';
 import Header from './components/Header';
 import Footer from './components/Footer';
-// Styles
-
-
-import './css/app.css';
+import Buscador from './components/Buscador';
 import CountryList from "./components/CountryList";
+// Styles
+import './css/app.css';
 
 
 function App() {
@@ -20,9 +19,10 @@ function App() {
 
       <div className="container mt-3 mb-5">  
         <Routes>
-          <Route exact path="/" element={<Login/>} />
-          <Route path="/listado" element={<Listado/>} />       
-          <Route path="/detalle" element={<Detalle/>} />       
+          <Route exact path="/" element={<Login />} />
+          <Route path="/listado" element={<Listado />} />       
+          <Route path="/detalle" element={<Detalle />} />       
+          <Route path="/busqueda" element={<Buscador />} />       
           <Route path="/countrylist" element={<CountryList/>} />       
         </Routes>
       </div>
