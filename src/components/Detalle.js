@@ -1,24 +1,38 @@
 import { Navigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Detalle (){
     //let token = localStorage.getItem('token');
     let token = sessionStorage.getItem('token');
-    
+        
     let query = new URLSearchParams(window.location.search);
     let movieId = query.get('movieID');
 
+    function dateAdapter(date){
+        let newDate = date.split('-');
+       return newDate[2] + '/' + newDate[1] + '/' + newDate[0];
+    }
+
+    const [movie, setMovie] = useState(null);
+
     useEffect(() => {
-        const endPoint = `https://api.themoviedb.org/3/movie/${movieId}?api_key=f42cd7e77ee2958bbac0b48a6cbaaa7a&language=en-US`
+        const endPoint = `https://api.themoviedb.org/3/movie/${movieId}?api_key=f42cd7e77ee2958bbac0b48a6cbaaa7a&language=es-ES`
                 
         axios.get(endPoint)
             .then(response => {
-                const movieData = response.data;
-                console.log(movieData);
+                const movieData = response.data;                
+                let date = dateAdapter(movieData.release_date);
+                setMovie({
+                    ...movieData, 
+                    release_date: date
+                });                
+                /* setMovie(movieData);
+                movieData.release_date = date;  */  
+                //console.log(movieData);             
             })
             .catch(error => {
-                console.log('Hubo un error, intenta mas tarde');
+                console.log('Hubo un error, intenta mas tarde ' + error);
             })        
     }, [movieId]);
     
@@ -26,27 +40,31 @@ function Detalle (){
     return (
         <>
             { !token && <Navigate replace to="/" />}
-            <h2>Detalle de la pelicula</h2>
-            <div className="row">
-                <div className="col-4">
-                    imagen
+            { !movie && <h5>Cargando...</h5>}
+            { movie && 
+            <>
+                <h2>{movie.title}</h2>
+                <div className="row">
+                    <div className="col-4">
+                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="img-fluid" alt="movie poster" />
+                    </div>
+                    <div className="col-8">
+                        <h5>Fecha de estreno: { movie.release_date }</h5>
+                        <h5>Reseña: { movie.overview }</h5>
+                        <p></p>
+                        <h5>Rating: { movie.vote_average }</h5>
+                        <h5>Generos: </h5>
+                        <ul>
+                            {movie.genres.map((oneGenre, id) => {
+                                return (
+                                <li>{ oneGenre.name }</li>);
+                                })
+                            }                       
+                        </ul>
+                    </div>
                 </div>
-                <div className="col-8">
-                    <h5>Fecha de estreno: </h5>
-                    <h5>Reseña: </h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                       laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
-                       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-                       non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <h5>Generos: </h5>
-                    <ul>
-                        <li>Genero 1</li>
-                        <li>Genero 2</li>
-                        <li>Genero 3</li>
-                    </ul>
-                </div>
-            </div>
+            </>
+            }
         </>
     )
 }
