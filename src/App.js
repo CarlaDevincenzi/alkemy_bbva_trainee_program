@@ -6,7 +6,7 @@ import Listado from './components/Listado';
 import Detalle from './components/Detalle';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Buscador from './components/Buscador';
+import Resultados from './components/Resultados';
 import CountryList from "./components/CountryList";
 // Styles
 import './css/app.css';
@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/" element={<Login />} />
           <Route path="/listado" element={<Listado />} />       
           <Route path="/detalle" element={<Detalle />} />       
-          <Route path="/busqueda" element={<Buscador />} />       
+          <Route path="/resultados" element={<Resultados />} />       
           <Route path="/countrylist" element={<CountryList/>} />       
         </Routes>
       </div>
