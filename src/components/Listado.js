@@ -3,6 +3,8 @@ import { Link, Navigate } from "react-router-dom";
 import axios from 'axios';
 import swAlert from '@sweetalert/with-react';
 
+import '../css/miEstilo.css';
+
 function Listado(){
     
     //let token = localStorage.getItem("token");
@@ -11,7 +13,7 @@ function Listado(){
     const [moviesList, setMoviesList] = useState([]);
 
     useEffect(() => {
-      const  endPoint = 'https://api.themoviedb.org/3/discover/movie?api_key=f42cd7e77ee2958bbac0b48a6cbaaa7a&language=en-EN&page=1'       
+      const  endPoint = 'https://api.themoviedb.org/3/discover/movie?api_key=f42cd7e77ee2958bbac0b48a6cbaaa7a&language=es-ES&page=1'       
       axios.get(endPoint)
             .then(response => {
                 const apiData = response.data.results
@@ -32,7 +34,12 @@ function Listado(){
                             return (
                                 <div className="col-3" key={index}>
                                     <div className="card my-4">
-                                        <img src={`https://image.tmdb.org/t/p/w500${oneMovie.poster_path}`} className="card-img-top" alt="..." />
+                                        {/* Para que ponga una imagen cuando no hay poster */} 
+                                        {(oneMovie.poster_path) ?
+                                            <img src={`https://image.tmdb.org/t/p/w500${oneMovie.poster_path}`} className="card-img-top img-size" alt="..." /> :
+                                            <img src="https://via.placeholder.com/600x400" className="card-img-top img-size" alt="..." />                                    
+                                        }
+                                        
                                         <div className="card-body">
                                             <h5 className="card-title">{ oneMovie.title }</h5>
                                             <p className="card-text">{ oneMovie.overview.substring(0, 150) }...</p>                                             

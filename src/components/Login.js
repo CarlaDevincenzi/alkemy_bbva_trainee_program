@@ -44,8 +44,7 @@ function Login(){
 
     return(
         <>
-            { token && <Navigate replace to="/listado" /> }
-
+           { token && <Navigate replace to="/listado" /> }           
             <div className="row">
                 <div className="col-6 offset-3">
                     <h2>Formulario de Login</h2>
@@ -60,7 +59,7 @@ function Login(){
                             <input className="form-control" type="password" name="password" />
                         </label>                        
                         <button className="btn btn-info mt-2" type="submit">Ingresar</button>  
-                </form>
+                    </form>
                 </div>
             </div>
         </>

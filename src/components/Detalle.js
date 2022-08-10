@@ -23,13 +23,15 @@ function Detalle (){
             .then(response => {
                 const movieData = response.data;                
                 let date = dateAdapter(movieData.release_date);
+
                 setMovie({
                     ...movieData, 
                     release_date: date
                 });                
                 /* setMovie(movieData);
                 movieData.release_date = date;  */  
-                //console.log(movieData);             
+                console.log(movieData);                 
+                
             })
             .catch(error => {
                 console.log('Hubo un error, intenta mas tarde ' + error);
@@ -40,13 +42,16 @@ function Detalle (){
     return (
         <>
             { !token && <Navigate replace to="/" />}
-            { !movie && <h5>Cargando...</h5>}
-            { movie && 
+            { (!movie) ? <h5>Cargando...</h5> :             
             <>
                 <h2>{movie.title}</h2>
                 <div className="row">
                     <div className="col-4">
-                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="img-fluid" alt="movie poster" />
+                        {(movie.poster_path) ?
+                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="img-fluid" alt="movie poster" /> :
+                            /* <img src="../images/imagen-no-disponible.jpg" className="img-fluid" alt="movie poster" />  */
+                            <img src="https://via.placeholder.com/600x400" className="img-fluid" alt="movie poster" /> 
+                        }
                     </div>
                     <div className="col-8">
                         <h5>Fecha de estreno: { movie.release_date }</h5>

@@ -16,7 +16,7 @@ function Buscador() {
             swAlert(<h5>Tiene que ingresar al menos 4 caracteres</h5>);
         }else{
             e.currentTarget.keyWord.value = '';
-            navigate(`/resultados?keyword=${keyWord}`);
+            navigate(`/resultados?keyword=${keyWord}`);            
         }
     }
 
