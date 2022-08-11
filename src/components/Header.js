@@ -20,7 +20,10 @@ function Header() {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link active" to={"/listado"}>Listado</Link>
-                            </li>        
+                            </li> 
+                            <li className="nav-item">
+                                <Link className="nav-link active" to={"/favoritos"}>Favoritos</Link>
+                            </li>          
                         </ul>                                               
                     </div> 
                                      

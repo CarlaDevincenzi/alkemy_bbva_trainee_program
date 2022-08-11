@@ -7,6 +7,8 @@ import Detalle from './components/Detalle';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Resultados from './components/Resultados';
+import Favoritos from './components/Favoritos';
+
 import CountryList from "./components/CountryList";
 // Styles
 import './css/app.css';
@@ -63,6 +65,7 @@ function App() {
           <Route path="/listado" element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />       
           <Route path="/detalle" element={<Detalle />} />       
           <Route path="/resultados" element={<Resultados />} />       
+          <Route path="/favoritos" element={<Favoritos />} />       
           <Route path="/countrylist" element={<CountryList/>} />       
         </Routes>
       </div>
