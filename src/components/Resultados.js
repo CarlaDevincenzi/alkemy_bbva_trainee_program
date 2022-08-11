@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import swAlert from '@sweetalert/with-react';
+import img_notFound from '../images/imagen-no-disponible.jpg'
 import '../css/miEstilo.css';
 
-function Resultados(){
+function Resultados(props){
 
     let query = new URLSearchParams(window.location.search);
     let key_word = query.get('keyword');
@@ -52,8 +53,13 @@ function Resultados(){
                                     {/* Para que ponga una imagen cuando no hay poster */} 
                                     {(oneMovie.poster_path) ?
                                         <img src={`https://image.tmdb.org/t/p/w500${oneMovie.poster_path}`} className="card-img-top img-size" alt="..." /> :
-                                        <img src="https://via.placeholder.com/600x400" className="card-img-top img-size" alt="..." />                                    
+                                        <img src={img_notFound} className="card-img-top img-size" alt="..." />                                    
                                     }
+
+                                    <button className="favourite-btn"
+                                        onClick={props.addOrRemoveFromFavs}
+                                        data-movie-id={oneMovie.id}
+                                    > 🖤 </button>
 
                                    <div className="card-body">
                                         <h5 className="card-title">{ oneMovie.title }</h5>                                                                                    

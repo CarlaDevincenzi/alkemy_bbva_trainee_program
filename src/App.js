@@ -30,10 +30,11 @@ function App() {
     const parent = btn.parentElement;
     const imgURL = parent.querySelector('img').getAttribute('src');
     const title = parent.querySelector('h5').innerText;
-    const overview = parent.querySelector('p').innerText;
+    //const overview = parent.querySelector('p').innerText;
     
     const movieData = {
-      imgURL, title, overview,
+      imgURL, title,
+      // overview,
       id: btn.dataset.movieId
     }
     
@@ -64,8 +65,8 @@ function App() {
           <Route exact path="/" element={<Login />} />
           <Route path="/listado" element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />       
           <Route path="/detalle" element={<Detalle />} />       
-          <Route path="/resultados" element={<Resultados />} />       
-          <Route path="/favoritos" element={<Favoritos />} />       
+          <Route path="/resultados" element={<Resultados  addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />       
+          <Route path="/favoritos" element={<Favoritos addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />       
           <Route path="/countrylist" element={<CountryList/>} />       
         </Routes>
       </div>
