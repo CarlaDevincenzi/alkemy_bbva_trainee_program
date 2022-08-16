@@ -1,5 +1,6 @@
 // Libraries
 import {Routes, Route} from "react-router-dom";
+import { useEffect, useState } from "react";
 //Components
 import Login from './components/Login';
 import Listado from './components/Listado';
@@ -14,7 +15,18 @@ import CountryList from "./components/CountryList";
 import './css/app.css';
 
 
-function App() {    
+function App() { 
+  
+  const [favorites, setFavorites ] = useState([]);
+
+    useEffect(() => {
+        const favsInLocal = localStorage.getItem('favs');
+
+        if(favsInLocal){
+            const favsArray = JSON.parse(favsInLocal);            
+            setFavorites(favsArray);
+        }
+    }, []);
 
   const addOrRemoveFromFavs = (e) => {
     const favMovies = localStorage.getItem('favs');
@@ -45,6 +57,7 @@ function App() {
     if(!movieIsInArray){
       tempMovieInFavs.push(movieData);
       localStorage.setItem('favs', JSON.stringify(tempMovieInFavs));
+      setFavorites(tempMovieInFavs);
       console.log('se agrego la pelicula');
     }else{ // aca elimina la pelicula si ya estaba guardada
       let moviesLeft = tempMovieInFavs.filter(oneMovie => {
@@ -52,13 +65,14 @@ function App() {
       });
       
       localStorage.setItem('favs', JSON.stringify(moviesLeft));
+      setFavorites(moviesLeft);
       console.log('se elimino la pelicula');
     }
   }
 
   return (
    <>          
-      <Header />
+      <Header favorites={favorites}/>
 
       <div className="container mt-3 mb-5">  
         <Routes>
@@ -66,7 +80,7 @@ function App() {
           <Route path="/listado" element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />       
           <Route path="/detalle" element={<Detalle />} />       
           <Route path="/resultados" element={<Resultados  addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />       
-          <Route path="/favoritos" element={<Favoritos addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />       
+          <Route path="/favoritos" element={<Favoritos favorites={favorites} addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />       
           <Route path="/countrylist" element={<CountryList/>} />       
         </Routes>
       </div>

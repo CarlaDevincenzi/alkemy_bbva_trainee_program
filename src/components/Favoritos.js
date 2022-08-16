@@ -1,26 +1,15 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import img_notFound from '../images/imagen-no-disponible.jpg'
 
 function Favoritos(props) {
-    const [favorites, setFavorites ] = useState([]);
-
-    useEffect(() => {
-        const favsInLocal = localStorage.getItem('favs');
-
-        if(favsInLocal){
-            const favsArray = JSON.parse(favsInLocal);
-            console.log(favsArray);
-            setFavorites(favsArray);
-        }
-    }, []);
-
+        
     return( 
     <>
         <h2>Sección Favoritos</h2>
         <div className="row">
+            { !props.favorites.length && <div className='col-12 text-danger'>No tenes nada en favoritos</div> }
             {
-               favorites.map((oneMovie, index) =>{
+               props.favorites.map((oneMovie, index) =>{
                         return (
                             <div className="col-3" key={index}>
                                 <div className="card my-4">
